@@ -50,8 +50,14 @@ export class UsersService {
     return result;
   }
 
-  updateUser(id: number, user: UpdateUserDTO){
-    return this.userRepository.update({id}, user);
+  async updateUser(id: number, user: UpdateUserDTO){
+    const userFound = await this.userRepository.findOne({ where: {id} });
+
+    if(!userFound){
+      return new HttpException('Usuario no Encontrado', HttpStatus.NOT_FOUND);
+    }
+    const updateUser = Object.assign(userFound, user);
+    return this.userRepository.save(updateUser);
   }
 
 }
