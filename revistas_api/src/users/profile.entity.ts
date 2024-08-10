@@ -12,7 +12,7 @@ export class Profile {
     lastname: string
 
     @Column()
-    cedula: string
+    dni: string
 
     @Column()
     age: number
