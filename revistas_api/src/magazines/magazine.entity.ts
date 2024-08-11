@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/users/user.entity";
 
 @Entity()
 export class Magazine {
@@ -23,5 +24,11 @@ export class Magazine {
 
     @Column()
     price: number;
-    //autorId: string;
+    
+    @Column()
+    authorId: number;
+
+    /*Relación Muchos a Uno */
+    @ManyToOne(() => User, user => user.magazines)
+    author: User
 }
