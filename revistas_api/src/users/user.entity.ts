@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Profile } from './profile.entity';
+import { Magazine } from 'src/magazines/magazine.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -22,4 +23,8 @@ export class User {
   @OneToOne(() => Profile)
   @JoinColumn()
   profile: Profile
+
+  /*Relación Uno a Muchos */
+  @OneToMany(() => Magazine, magazine => magazine.author)
+  magazines: Magazine[]
 }
