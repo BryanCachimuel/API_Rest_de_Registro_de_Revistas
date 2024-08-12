@@ -21,7 +21,7 @@ export class MagazinesService {
         return this.magazinesRepository.save(newMagazine);
     }
 
-    getMagazine() {
+    getMagazines() {
         return this.magazinesRepository.find();
     }
 
