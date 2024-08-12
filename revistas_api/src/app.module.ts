@@ -5,7 +5,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MagazinesService } from './magazines/magazines.service';
 import { MagazinesController } from './magazines/magazines.controller';
-import { MegazinesModule } from './magazines/magazines.module';
+import { MagazinesModule } from './magazines/magazines.module';
 
 
 @Module({
@@ -21,7 +21,7 @@ import { MegazinesModule } from './magazines/magazines.module';
       synchronize: true
     }),
     UsersModule,
-    MegazinesModule
+    MagazinesModule
   ],
   controllers: [AppController, MagazinesController],
   providers: [AppService, MagazinesService],
