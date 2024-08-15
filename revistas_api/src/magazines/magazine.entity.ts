@@ -1,34 +1,33 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "src/users/user.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/users/user.entity';
 
-@Entity()
+@Entity({ name: 'magazines' })
 export class Magazine {
-    
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    yearPublication: number;
+  @Column()
+  yearPublication: number;
 
-    @Column()
-    title: string;
+  @Column()
+  title: string;
 
-    @Column()
-    description: string;
+  @Column()
+  description: string;
 
-    @Column()
-    numberPages: number;
+  @Column()
+  numberPages: number;
 
-    @Column()
-    stock: number;
+  @Column()
+  stock: number;
 
-    @Column()
-    price: number;
-    
-    @Column()
-    authorId: number;
+  @Column()
+  price: number;
 
-    /*Relación Muchos a Uno */
-    @ManyToOne(() => User, user => user.magazines)
-    author: User
+  @Column()
+  authorId: number;
+
+  /*Relación Muchos a Uno */
+  @ManyToOne(() => User, (user) => user.magazines)
+  author: User;
 }
