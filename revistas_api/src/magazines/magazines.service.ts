@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UsersService } from 'src/users/users.service';
 import { Magazine } from './magazine.entity';
 import { Repository } from 'typeorm';
 import { CreateMagazineDto } from './dto/create-magazine.dto';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class MagazinesService {
