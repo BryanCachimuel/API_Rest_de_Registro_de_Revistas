@@ -22,7 +22,9 @@ export class MagazinesService {
     }
 
     getMagazines() {
-        return this.magazinesRepository.find();
+        return this.magazinesRepository.find({
+            relations: ['author'],
+        });
     }
 
 }
