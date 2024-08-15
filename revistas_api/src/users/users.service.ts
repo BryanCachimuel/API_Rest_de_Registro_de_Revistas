@@ -34,7 +34,12 @@ export class UsersService {
   }
 
   async getUser(id: number) {
-    const userFound = await this.userRepository.findOne({ where: { id } });
+    const userFound = await this.userRepository.findOne({
+       where: { 
+          id 
+       }, 
+      relations:['magazines']
+  });
 
     if (!userFound) {
       return new HttpException('Usuario no Encontrado', HttpStatus.NOT_FOUND);
