@@ -3,7 +3,6 @@ import { CreateUserDTO } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { UpdateUserDTO } from './dto/update-user.dto';
-import { profile } from 'console';
 import { CreateProfileDto } from './dto/create-profile.dto';
 
 @Controller('users')
