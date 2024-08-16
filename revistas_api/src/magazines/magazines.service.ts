@@ -53,4 +53,13 @@ export class MagazinesService {
         return this.magazinesRepository.save(updateMagazine);
     }
 
+    async deleteMagazine(id: number){
+        const result = await this.magazinesRepository.delete({id});
+
+        if(result.affected === 0){
+            return new HttpException('Revista no Encontrada', HttpStatus.NOT_FOUND);
+        }
+        return result;
+    }
+
 }
