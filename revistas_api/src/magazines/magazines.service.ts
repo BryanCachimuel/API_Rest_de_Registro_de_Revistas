@@ -27,4 +27,16 @@ export class MagazinesService {
         });
     }
 
+    async getMagazine(id: number){
+        const magazineFound = await this.magazinesRepository.findOne({
+            where: { id }
+        });
+
+        if(!magazineFound){
+            return new HttpException('Revista no Encontrada', HttpStatus.NOT_FOUND);
+        }
+
+        return magazineFound;
+    }
+
 }
