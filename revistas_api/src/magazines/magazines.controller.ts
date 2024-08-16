@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CreateMagazineDto } from './dto/create-magazine.dto';
 import { MagazinesService } from './magazines.service';
 
@@ -15,8 +15,13 @@ export class MagazinesController {
     }
 
     @Get()
-    getMagazine() {
+    getMagazines() {
         return this.magazinesService.getMagazines();
+    }
+
+    @Get(':id')
+    getMagazine(@Param('id', ParseIntPipe) id:number){
+        return this.magazinesService.getMagazine(id);
     }
 
 }
