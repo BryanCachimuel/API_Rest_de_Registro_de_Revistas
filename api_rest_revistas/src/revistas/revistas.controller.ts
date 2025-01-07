@@ -1,6 +1,7 @@
-import { Controller, Get, Param, ParseIntPipe, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Post, Body, Put, Patch } from '@nestjs/common';
 import { RevistasService } from './revistas.service';
 import { CreateRevistaDto } from './dto/create-revista.dto';
+import { UpdateRevistaDto } from './dto/update-revista.dto';
 
 @Controller('revistas')
 export class RevistasController {
@@ -22,4 +23,13 @@ export class RevistasController {
         return await this.revistasService.createRevista(data);
     }
 
+    /*@Put('/:id')
+    async updateRevista(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateRevistaDto){
+        return await this.revistasService.updateRevista(id, data)
+    }*/
+
+    @Patch('/:id')
+    async updateRevista(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateRevistaDto){
+        return await this.revistasService.updateRevista(id, data)
+    }
 }
