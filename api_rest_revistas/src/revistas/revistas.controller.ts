@@ -1,5 +1,6 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Post, Body } from '@nestjs/common';
 import { RevistasService } from './revistas.service';
+import { CreateRevistaDto } from './dto/create-revista.dto';
 
 @Controller('revistas')
 export class RevistasController {
@@ -14,6 +15,11 @@ export class RevistasController {
     @Get('/:id')
     async getRevista(@Param('id', ParseIntPipe) id: number){
         return await this.revistasService.getRevista(id)
+    }
+
+    @Post()
+    async createRevista(@Body() data:CreateRevistaDto){
+        return await this.revistasService.createRevista(data);
     }
 
 }
