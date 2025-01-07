@@ -1,6 +1,8 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateRevistaDto } from './dto/create-revista.dto';
+import { UpdateRevistaDto } from './dto/update-revista.dto';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class RevistasService {
@@ -45,6 +47,28 @@ export class RevistasService {
             })
             return nuevaRevista;
         } catch (error) {
+            if(error instanceof Error)
+                throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async updateRevista(id: number, data: UpdateRevistaDto){
+        try {
+            const updateRevista = await this.prisma.revista.update({
+                where:{
+                    id
+                },
+                data:{
+                    titulo: data.titulo,
+                    descripcion: data.descripcion,
+                    editorial: data.editorial
+                }
+            })
+            return updateRevista;
+        } catch (error) {
+            /* en caso de que se ingrese un id que no existe prisma va a dar un error de esté tipo y por ende se realizá esta validación */
+            if(error instanceof PrismaClientKnownRequestError)
+                throw new NotFoundException(`La revista con el id ${id} no fue encontrada`)
             if(error instanceof Error)
                 throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
         }
