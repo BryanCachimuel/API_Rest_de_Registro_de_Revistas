@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
+import { CreateRevistaDto } from './dto/create-revista.dto';
 
 @Injectable()
 export class RevistasService {
@@ -28,6 +29,22 @@ export class RevistasService {
         } catch (error) {
             if(error instanceof NotFoundException)
                 throw new NotFoundException(error.message)
+            if(error instanceof Error)
+                throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async createRevista(revista: CreateRevistaDto){
+        try {
+            const nuevaRevista = await this.prisma.revista.create({
+                data:{
+                    titulo: revista.titulo,
+                    descripcion: revista.descripcion,
+                    editorial: revista.editorial
+                }
+            })
+            return nuevaRevista;
+        } catch (error) {
             if(error instanceof Error)
                 throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
         }
