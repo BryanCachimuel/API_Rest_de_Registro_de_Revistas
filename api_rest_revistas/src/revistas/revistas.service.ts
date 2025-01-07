@@ -73,4 +73,21 @@ export class RevistasService {
                 throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
+
+    async deteleRevista(id: number){
+        try {
+            const deleteRevista = await this.prisma.revista.delete({
+                where: {
+                    id
+                }
+            })
+            return deleteRevista;
+        } catch (error) {
+            /* en caso de que se ingrese un id que no existe prisma va a dar un error de esté tipo y por ende se realizá esta validación */
+            if(error instanceof PrismaClientKnownRequestError)
+                throw new NotFoundException(`La revista con el id ${id} no fue encontrada`)
+            if(error instanceof Error)
+                throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
 }
